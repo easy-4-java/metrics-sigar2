@@ -390,7 +390,6 @@
 		<mockito.version>2.23.4</mockito.version>
 		<slf4j.version>2.1.0</slf4j.version>
 		<sigar.version>1.6.5.132-6</sigar.version><!-- 1.6.4，1.6.5.132-6 -->
-		<sigar-native.version>1.0.3.RELEASE</sigar-native.version>
 	</properties>
 			 
 	<dependencyManagement>
@@ -460,12 +459,6 @@
 				<artifactId>sigar</artifactId>
 				<version>${sigar.version}</version>
 			</dependency>
-			<!-- https://mvnrepository.com/artifact/io.github.hiwepy/sigar-native -->
-			<dependency>
-				<groupId>io.github.easy4j</groupId>
-				<artifactId>sigar-native</artifactId>
-				<version>${sigar-native.version}</version>
-			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
@@ -522,18 +515,12 @@
 			<groupId>org.hyperic</groupId>
 			<artifactId>sigar</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.github.hiwepy/sigar-native -->
-		<dependency>
-			<groupId>io.github.easy4j</groupId>
-			<artifactId>sigar-native</artifactId>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.kamon/sigar-loader -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>io.kamon</groupId>
 			<artifactId>sigar-loader</artifactId>
 			<version>1.6.6</version>
-			<scope>runtime</scope>
-		</dependency> -->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.github.cb372/metrics-sigar -->
 		<!-- <dependency>
 		    <groupId>com.github.cb372</groupId>
