@@ -349,7 +349,8 @@
                 <lombok.version>1.18.46</lombok.version>
                 <additionalparam>-Xdoclint:none</additionalparam>
                 <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
-            </properties>
+            
+		<sigar-loader.version>1.6.6</sigar-loader.version></properties>
         </profile>
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
 
@@ -588,7 +589,7 @@
             <dependency>
                 <groupId>io.kamon</groupId>
                 <artifactId>sigar-loader</artifactId>
-                <version>1.6.6</version>
+                <version>${sigar-loader.version}</version>
             </dependency>
             <!-- For Lombok -->
             <dependency>
