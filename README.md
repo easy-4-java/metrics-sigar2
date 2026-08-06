@@ -1,8 +1,22 @@
 # metrics-sigar2
 
-[Overview](#1-project-overview) | [Features](#2-features--status) | [Requirements](#3-requirements--compatibility) | [Architecture](#4-architecture--modules) | [Installation](#5-installation) | [Quick Start](#6-quick-start) | [Configuration](#7-configuration) | [Core Usage](#8-core-usage--api) | [Testing & Build](#9-testing--build) | [Versioning](#10-versioning--branches) | [License](#11-contributing--license)
+[English](./README.md) | [简体中文](./README.zh-CN.md)
 
 > **Status**: maintained on the `feature/3.0.x` line (JDK 21). Artifacts are not yet published to Maven Central; they are distributed through the project's private repository and GitHub Releases.
+
+## Table of Contents
+
+- [1. Project Overview](#1-project-overview)
+- [2. Features & Status](#2-features--status)
+- [3. Requirements & Compatibility](#3-requirements--compatibility)
+- [4. Architecture & Modules](#4-architecture--modules)
+- [5. Installation](#5-installation)
+- [6. Quick Start](#6-quick-start)
+- [7. Configuration](#7-configuration)
+- [8. Core Usage / API](#8-core-usage--api)
+- [9. Testing & Build](#9-testing--build)
+- [10. Versioning & Branches](#10-versioning--branches)
+- [11. Contributing & License](#11-contributing--license)
 
 ## 1. Project Overview
 
