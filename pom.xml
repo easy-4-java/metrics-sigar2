@@ -245,7 +245,8 @@
 				<jdk>[1.7,)</jdk>
 			</activation>
 			<properties>
-				<lombok.version>1.18.46</lombok.version>
+				<central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+		<lombok.version>1.18.46</lombok.version>
 		<additionalparam>-Xdoclint:none</additionalparam>
 			</properties>
 		</profile>
