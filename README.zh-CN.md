@@ -2,6 +2,8 @@
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
+[![Java](https://img.shields.io/badge/Java-21-orange)](https://github.com/easy-4-java/metrics-sigar2) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
+
 > **项目状态**：`feature/3.0.x` 版本线维护中（JDK 21）。制品尚未发布到 Maven Central，通过项目私服与 GitHub Releases 分发。
 
 ## 目录
