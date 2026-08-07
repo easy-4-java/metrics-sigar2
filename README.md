@@ -4,7 +4,9 @@
 
 [![Java](https://img.shields.io/badge/Java-17-orange)](https://github.com/easy-4-java/metrics-sigar2) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
-> **Status**: maintained on the `feature/2.0.x` line (JDK 17). Artifacts are not yet published to Maven Central; they are distributed through the project's private repository and GitHub Releases.
+metrics-sigar2 exposes OS-level metrics of the host JVM as Dropwizard Metrics gauges using Hyperic Sigar (org.hyperic:sigar 1.6.5.132-6)
+
+> **Status**: maintained on the `feature/2.0.x` line (JDK 8). Artifacts are not yet published to Maven Central; they are distributed through the project's private repository and GitHub Releases.
 
 ## Table of Contents
 

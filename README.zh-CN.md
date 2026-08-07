@@ -4,7 +4,9 @@
 
 [![Java](https://img.shields.io/badge/Java-17-orange)](https://github.com/easy-4-java/metrics-sigar2) [![License](https://img.shields.io/badge/license-Apache%202.0-green)](./LICENSE)
 
-> **项目状态**：`feature/2.0.x` 版本线维护中（JDK 17）。制品尚未发布到 Maven Central，通过项目私服与 GitHub Releases 分发。
+metrics-sigar2 使用 Hyperic Sigar（org.hyperic:sigar 1.6.5.132-6）将宿主机操作系统级指标暴露为 Dropwizard Metrics gauge。
+
+> **项目状态**：`feature/2.0.x` 版本线维护中（JDK 8）。制品尚未发布到 Maven Central，通过项目私服与 GitHub Releases 分发。
 
 ## 目录
 
