@@ -30,20 +30,12 @@ public class JVMInfo {
 	public static final String JVM_MEMORY = "jvm.memory";
 	public static final String JVM_MEMORY_POOL = "jvm.memory.pool";
 	
-	@SuppressWarnings("restriction")
-	public static final int pid() {  
-		try {  
-            RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();  
-            Field jvm = runtime.getClass().getDeclaredField("jvm");  
-            jvm.setAccessible(true);  
-            sun.management.VMManagement mgmt = (sun.management.VMManagement) jvm.get(runtime);  
-            Method pidMethod = mgmt.getClass().getDeclaredMethod("getProcessId");  
-            pidMethod.setAccessible(true);  
-            int pid = (Integer) pidMethod.invoke(mgmt);  
-            return pid;  
-        } catch (Exception e) {  
-            return -1;  
-        }  
+	public static final int pid() {
+        try {
+            return (int) ProcessHandle.current().pid();
+        } catch (Exception e) {
+            return -1;
+        }
     }
 	
 	public static Map<String, Object> info() {
