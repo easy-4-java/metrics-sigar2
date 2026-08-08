@@ -15,38 +15,49 @@
  */
 package com.codahale.metrics.sigar.utils;
 
+/**
+ * Enumeration of JVM memory property keys corresponding to the fields
+ * of a {@link java.lang.management.MemoryUsage MemoryUsage} object.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see java.lang.management.MemoryUsage
+ * @see MemoryInfo
+ */
 public enum MemProperty {
-	
+
 	/**
-	 * 表示 Java 虚拟机在启动期间从操作系统请求的用于内存管理的初始内存容量（以字节为单位）。
-	 * Java 虚拟机可能在运行过程中从操作系统请求更多的内存，也可能将内存释放给系统。init 的值可以是不明确的
+	 * Initial memory requested from the OS during JVM startup (bytes).
+	 * May be undefined.
 	 */
 	MEM_INIT("init"),
 	/**
-	 * 表示当前已经使用的内存量（以字节为单位）。 
+	 * Currently used memory (bytes).
 	 */
 	MEM_USED("used"),
 	/**
-	 * 表示保证可以由 Java 虚拟机使用的内存量（以字节为单位）。
-	 * 已提交的内存量可以随时间而变化（增加或减少）。
-	 * Java 虚拟机可能会将内存释放给系统，committed 可以小于 init。committed 将始终大于或等于 used。
+	 * Memory committed for use by the JVM (bytes). Always &gt;= used.
 	 */
 	MEM_COMMITTED("committed"),
 	/**
-	 * 表示可以用于内存管理的最大内存量（以字节为单位）。
-	 * 可以不定义其值。如果定义了该值，最大内存量可能随时间而更改。已使用的内存量和已提交的内存量将始终小于或等于 max（如果定义了 max）。
-	 * 如果内存分配试图增加满足以下条件的已使用内存将会失败：used &gt; committed，即使 used &lt;= max 仍然为 true（例如，当系统的虚拟内存不足时）。 
+	 * Maximum memory that can be used for memory management (bytes).
+	 * May be undefined (-1).
 	 */
 	MEM_MAX("max");
-	
+
 	protected String key;
-	
+
 	MemProperty(String key){
 		this.key = key;
 	}
-	
+
+	/**
+	 * Returns the property key string (e.g. "init", "used").
+	 *
+	 * @return the key string
+	 */
 	public String getKey() {
 		return key;
 	}
-	
+
 }

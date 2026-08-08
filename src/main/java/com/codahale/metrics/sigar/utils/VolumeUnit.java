@@ -15,6 +15,13 @@
  */
 package com.codahale.metrics.sigar.utils;
 
+/**
+ * Enumeration of volume measurement units (placeholder for future
+ * implementation).
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ */
 public class VolumeUnit {
 
 }

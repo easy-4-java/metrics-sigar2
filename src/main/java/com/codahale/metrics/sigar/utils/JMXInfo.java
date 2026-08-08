@@ -33,19 +33,39 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
 
+/**
+ * Collects JVM metrics using JMX ManagementFactory beans.
+ *
+ * <p>Provides static methods to retrieve runtime properties, memory
+ * usage (heap and non-heap), memory pool details, OS info, thread
+ * stats, JIT compilation stats, and garbage collector stats.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see JVMInfo
+ * @see MemoryInfo
+ */
 public class JMXInfo {
-    
+
+	/** Prefix key for JVM memory metrics. */
 	public static final String JVM_MEMORY = "jvm.memory";
+	/** Prefix key for JVM memory pool metrics. */
 	public static final String JVM_MEMORY_POOL = "jvm.memory.pool";
 
+	/**
+	 * Returns JVM runtime properties as reported by
+	 * {@link RuntimeMXBean}.
+	 *
+	 * @return a map of property keys to values; never {@code null}
+	 */
 	public static Map<String, Object> runtime(){
-		
+
 		System.out.println("==========================Runtime=========================");
-		
+
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
+
         RuntimeMXBean runtimeMBean = ManagementFactory.getRuntimeMXBean();
-        
+
         dataMap.put(JVMProperty.JAVA_VM_NAME.getKey(), runtimeMBean.getVmName() );
         dataMap.put(JVMProperty.JAVA_VM_VERSION.getKey(), runtimeMBean.getVmVersion() );
         dataMap.put(JVMProperty.JAVA_VM_OPTIONS.getKey(), StringUtils.join(runtimeMBean.getInputArguments().iterator(), " ") );
@@ -56,150 +76,177 @@ public class JMXInfo {
         dataMap.put(JVMProperty.JAVA_SPECIFICATION_NAME.getKey(),  runtimeMBean.getSpecName() );
         dataMap.put(JVMProperty.JAVA_SPECIFICATION_VERSION.getKey(),  runtimeMBean.getSpecVersion() );
         dataMap.put(JVMProperty.JAVA_SPECIFICATION_VENDER.getKey(),  runtimeMBean.getSpecVendor() );
-        
+
         return dataMap;
-        
+
 	}
-	
+
+	/**
+	 * Returns heap and non-heap memory usage information.
+	 *
+	 * @param unit the capacity unit for the returned values
+	 * @return a list of {@link MemoryInfo} entries; never {@code null}
+	 */
 	public static List<MemoryInfo> memory(Unit unit){
-		
+
 		List<MemoryInfo> dataList = new ArrayList<MemoryInfo>();
-		
+
 		//==========================Memory=========================
-		
-		MemoryMXBean memoryMBean = ManagementFactory.getMemoryMXBean();  
-		
-		MemoryUsage usage = memoryMBean.getHeapMemoryUsage();   
-		
+
+		MemoryMXBean memoryMBean = ManagementFactory.getMemoryMXBean();
+
+		MemoryUsage usage = memoryMBean.getHeapMemoryUsage();
+
 		Map<String, Long> heapUsageMap = new HashMap<String, Long>();
-		
+
 		heapUsageMap.put(MemProperty.MEM_INIT.getKey(), usage.getInit());
 		heapUsageMap.put(MemProperty.MEM_USED.getKey(), usage.getUsed());
 		heapUsageMap.put(MemProperty.MEM_COMMITTED.getKey(), usage.getCommitted());
 		heapUsageMap.put(MemProperty.MEM_MAX.getKey(), usage.getMax());
-		
+
 		dataList.add(new MemoryInfo(JVM_MEMORY, "HeapMemoryUsage", heapUsageMap, unit));
-		
-		MemoryUsage nousage = memoryMBean.getNonHeapMemoryUsage(); 
+
+		MemoryUsage nousage = memoryMBean.getNonHeapMemoryUsage();
 		Map<String, Long> nonHeapUsageMap = new HashMap<String, Long>();
-		
+
 		nonHeapUsageMap.put(MemProperty.MEM_INIT.getKey(), nousage.getInit());
 		nonHeapUsageMap.put(MemProperty.MEM_USED.getKey(), nousage.getUsed());
 		nonHeapUsageMap.put(MemProperty.MEM_COMMITTED.getKey(), nousage.getCommitted());
 		nonHeapUsageMap.put(MemProperty.MEM_MAX.getKey(), nousage.getMax());
-    
+
 		dataList.add(new MemoryInfo(JVM_MEMORY, "NonHeapMemoryUsage", nonHeapUsageMap, unit));
-		
+
 		return dataList;
-		 
+
 	}
-	
+
+	/**
+	 * Returns memory pool usage and peak usage for all memory pools.
+	 *
+	 * @param unit the capacity unit for the returned values
+	 * @return a list of {@link MemoryInfo} entries; never {@code null}
+	 */
 	public static List<MemoryInfo> memoryPool(Unit unit){
-		
+
 		List<MemoryInfo> dataList = new ArrayList<MemoryInfo>();
-		
+
 		//==========================MemoryPool=========================
-		
-        //获取多个内存池的使用情况  
-        List<MemoryPoolMXBean> mpMBeanList = ManagementFactory.getMemoryPoolMXBeans();  
+
+        List<MemoryPoolMXBean> mpMBeanList = ManagementFactory.getMemoryPoolMXBeans();
         for(MemoryPoolMXBean mpMBean : mpMBeanList){
-        	
+
         	String prefix = JVM_MEMORY_POOL + "." + StringUtils.join(mpMBean.getName().split(" "),"_");
-        	
-        	// 返回此内存池的内存使用量的估计数。
-        	MemoryUsage usage = mpMBean.getUsage();   
+
+        	MemoryUsage usage = mpMBean.getUsage();
         	Map<String, Long> usageMap = new HashMap<String, Long>();
-        	
+
         	usageMap.put(MemProperty.MEM_INIT.getKey(), usage.getInit());
         	usageMap.put(MemProperty.MEM_USED.getKey(), usage.getUsed());
         	usageMap.put(MemProperty.MEM_COMMITTED.getKey(), usage.getCommitted());
         	usageMap.put(MemProperty.MEM_MAX.getKey(), usage.getMax());
-        	
+
         	dataList.add(new MemoryInfo(prefix, "Usage", usageMap, unit));
-        	
-            // 返回自 Java 虚拟机启动以来或自峰值重置以来此内存池的峰值内存使用量。
-        	MemoryUsage peakUsage = mpMBean.getPeakUsage();   
+
+        	MemoryUsage peakUsage = mpMBean.getPeakUsage();
         	Map<String, Long> peakUsageMap = new HashMap<String, Long>();
-        	
+
         	peakUsageMap.put(MemProperty.MEM_INIT.getKey(), peakUsage.getInit());
         	peakUsageMap.put(MemProperty.MEM_USED.getKey(), peakUsage.getUsed());
         	peakUsageMap.put(MemProperty.MEM_COMMITTED.getKey(), peakUsage.getCommitted());
         	peakUsageMap.put(MemProperty.MEM_MAX.getKey(), peakUsage.getMax());
-        	
+
         	dataList.add(new MemoryInfo(prefix, "PeakUsage", peakUsageMap, unit));
-            
+
         }
-        
+
 		return dataList;
-        
+
 	}
-	
+
+	/**
+	 * Returns basic operating system information.
+	 *
+	 * @return a map of OS property keys to values; never {@code null}
+	 */
 	public static Map<String, Object> os(){
-		
+
 		//==========================OperatingSystem=========================
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-        
-        OperatingSystemMXBean osMBean = ManagementFactory.getOperatingSystemMXBean();  
-        //获取操作系统相关信息  
+
+        OperatingSystemMXBean osMBean = ManagementFactory.getOperatingSystemMXBean();
         dataMap.put("os.name", osMBean.getName());
         dataMap.put("os.arch", osMBean.getArch());
         dataMap.put("os.version", osMBean.getVersion());
         dataMap.put("os.cores", osMBean.getAvailableProcessors());
-        
-        
+
+
         return dataMap;
-        
+
 	}
-	
+
+	/**
+	 * Returns thread-related metrics from the current JVM.
+	 *
+	 * @return a map of thread metric keys to values; never {@code null}
+	 */
 	public static Map<String, Object> thread(){
-		
+
 		//==========================Thread=========================
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 
-        //获取各个线程的各种状态，CPU 占用情况，以及整个系统中的线程状况  
-        ThreadMXBean threadMBean = ManagementFactory.getThreadMXBean(); 
-        
+        ThreadMXBean threadMBean = ManagementFactory.getThreadMXBean();
+
         dataMap.put("jvm.thread.CurrentThreadCpuTime", threadMBean.getCurrentThreadCpuTime());
         dataMap.put("jvm.thread.CurrentThreadUserTime", threadMBean.getCurrentThreadUserTime());
         dataMap.put("jvm.thread.DaemonThreadCount", threadMBean.getDaemonThreadCount());
         dataMap.put("jvm.thread.PeakThreadCount", threadMBean.getPeakThreadCount());
         dataMap.put("jvm.thread.ThreadCount", threadMBean.getThreadCount());
         dataMap.put("jvm.thread.TotalStartedThreadCount", threadMBean.getTotalStartedThreadCount());
-        
+
         return dataMap;
-        
+
 	}
-	
+
+	/**
+	 * Returns JIT compilation statistics.
+	 *
+	 * @return a map containing the compiler name and total compilation time;
+	 *         never {@code null}
+	 */
 	public static Map<String, Object> compilation(){
-		
+
 		//==========================Compilation=========================
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
-        CompilationMXBean compilMBean = ManagementFactory.getCompilationMXBean();   
-        
+
+        CompilationMXBean compilMBean = ManagementFactory.getCompilationMXBean();
+
         dataMap.put("jvm.compilation.name", compilMBean.getName());
         dataMap.put("jvm.compilation.totalCompilationTime", compilMBean.getTotalCompilationTime());
-        
+
         return dataMap;
-        
+
 	}
-	
+
+	/**
+	 * Returns garbage collector statistics. Note: if multiple GCs
+	 * exist, only the last one's stats are retained in the map.
+	 *
+	 * @return a map of GC metric keys to values; never {@code null}
+	 */
 	public static Map<String, Object> gc(){
-		
+
 		 //==========================GarbageCollector=========================
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		
-		//获取GC的次数以及花费时间之类的信息  
-        List<GarbageCollectorMXBean> gcMBeanList = ManagementFactory.getGarbageCollectorMXBeans();  
-        for(GarbageCollectorMXBean gcMBean : gcMBeanList){  
+
+        List<GarbageCollectorMXBean> gcMBeanList = ManagementFactory.getGarbageCollectorMXBeans();
+        for(GarbageCollectorMXBean gcMBean : gcMBeanList){
             dataMap.put("jvm.gc.name", gcMBean.getName());
             dataMap.put("jvm.gc.count", gcMBean.getCollectionCount());
             dataMap.put("jvm.gc.time", gcMBean.getCollectionTime());
-            //名称 = 'PS Scavenge', 收集 = 16, 总花费时间 = 0.066 秒
-        }   
-        
+        }
+
         return dataMap;
-        
+
 	}
-	
+
 }
