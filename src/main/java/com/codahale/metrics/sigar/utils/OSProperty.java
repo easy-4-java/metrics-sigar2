@@ -15,53 +15,50 @@
  */
 package com.codahale.metrics.sigar.utils;
 
+/**
+ * Enumeration of operating system related system property keys.
+ *
+ * <p>Duplicates the keys in {@link JVMOSProperty} for backward
+ * compatibility.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see JVMOSProperty
+ */
 public enum OSProperty {
-	
-	/**
-	 * 操作系统名称
-	 */
+
+	/** Operating system name. */
 	OS_NAME("os.name"),
-	/**
-	 * 操作系统构架
-	 */
+	/** Operating system architecture. */
 	OS_ARCH("os.arch"),
-	/**
-	 * 操作系统的版本
-	 */
+	/** Operating system version. */
 	OS_VERSION("os.version"),
-	/**
-	 * 文件分隔符
-	 */
+	/** File separator character. */
 	FILE_SEPARATOR("file.separator"),
-	/**
-	 * 路径分隔符
-	 */
+	/** Path separator character. */
 	PATH_SEPARATOR("path.separator"),
-	/**
-	 * 行分隔符
-	 */
+	/** Line separator string. */
 	LINE_SEPARATOR("line.separator"),
-	/**
-	 * 用户的账户名称
-	 */
+	/** Current user's account name. */
 	USER_NAME("user.name"),
-	/**
-	 * 用户的主目录
-	 */
+	/** Current user's home directory. */
 	USER_HOME("user.home"),
-	/**
-	 * 用户的当前工作目录
-	 */
+	/** Current user's working directory. */
 	USER_DIR("user.dir");
-	
+
 	protected String key;
-	
+
 	OSProperty(String key){
 		this.key = key;
 	}
-	
+
+	/**
+	 * Returns the system property key for this entry.
+	 *
+	 * @return the property key string
+	 */
 	public String getKey() {
 		return key;
 	}
-	
+
 }

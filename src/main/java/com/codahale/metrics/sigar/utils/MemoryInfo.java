@@ -22,36 +22,82 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
 
+/**
+ * Data object representing a JVM memory segment (heap, non-heap, or
+ * memory pool) with its init/used/committed/max values and a
+ * capacity unit for formatting.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see JMXInfo
+ * @see JVMInfo
+ * @see MemProperty
+ */
 public class MemoryInfo {
-	
+
 	protected String prefix;
 	protected String type;
 	protected Map<String, Long> usage;
 	protected Unit unit;
-	
+
+	/**
+	 * Constructs a new {@code MemoryInfo}.
+	 *
+	 * @param prefix the metric prefix (e.g. "jvm.memory")
+	 * @param type   the segment type (e.g. "HeapMemoryUsage")
+	 * @param usage  a map of {@link MemProperty} keys to byte values
+	 * @param unit   the capacity unit for formatting
+	 */
 	public MemoryInfo(final String prefix,final String type,final Map<String, Long> usage,final Unit unit) {
 		this.prefix = prefix;
 		this.type = type;
 		this.usage = usage;
 		this.unit = unit;
 	}
-	
+
+	/**
+	 * Returns the metric prefix.
+	 *
+	 * @return the prefix string
+	 */
 	public String getPrefix() {
 		return prefix;
 	}
-	
+
+	/**
+	 * Returns the segment type name.
+	 *
+	 * @return the type string
+	 */
 	public String getType() {
 		return type;
 	}
-	
+
+	/**
+	 * Returns the raw usage map (byte values).
+	 *
+	 * @return the usage map; never {@code null}
+	 */
 	public Map<String, Long> getUsage() {
 		return usage;
 	}
 
+	/**
+	 * Returns the capacity unit used for formatting.
+	 *
+	 * @return the unit
+	 */
 	public Unit getUnit() {
 		return unit;
 	}
-	
+
+	/**
+	 * Converts the raw usage map to a formatted map where each value
+	 * is expressed in the configured {@link Unit}.
+	 *
+	 * @return a map of dotted metric keys to formatted capacity strings;
+	 *         never {@code null}
+	 */
 	public Map<String, String> toMap() {
 		Map<String, String> dataMap = new HashMap<String, String>();
 		for (String key : usage.keySet()) {
@@ -59,7 +105,13 @@ public class MemoryInfo {
 		}
 		return dataMap;
 	}
-	
+
+	/**
+	 * Returns a human-readable representation showing init, used,
+	 * committed, and max values in both bytes and kilobytes.
+	 *
+	 * @return a descriptive string; never {@code null}
+	 */
 	@Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
@@ -69,6 +121,6 @@ public class MemoryInfo {
         buf.append("max = " + usage.get("max") + "(" + (usage.get("max") >> 10) + "K)");
 		return buf.toString();
 	}
-	
-	
+
+
 }
