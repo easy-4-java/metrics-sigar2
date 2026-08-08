@@ -20,19 +20,39 @@ import java.lang.management.*;
 import java.util.*;
 
 /**
- * This memory warning system will call the listener when we exceed the
- * percentage of available memory specified. There should only be one instance
- * of this object created, since the usage threshold can only be set to one
- * number.
+ * Memory warning system that notifies registered
+ * {@link Listener listeners} when the JVM's tenured generation heap
+ * exceeds a configurable usage threshold.
+ *
+ * <p>Only one threshold can be active at a time (as imposed by the
+ * JMX memory pool API), so only one {@code MemoryWarningSystem}
+ * instance should be created per JVM.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see Listener
  */
 public class MemoryWarningSystem {
-	
+
 	private final Collection<Listener> listeners = new ArrayList<Listener>();
 
+	/**
+	 * Callback interface for memory usage threshold violations.
+	 */
 	public interface Listener {
+		/**
+		 * Called when memory usage exceeds the configured threshold.
+		 *
+		 * @param usedMemory the currently used memory in bytes
+		 * @param maxMemory  the maximum available memory in bytes
+		 */
 		public void memoryUsageLow(long usedMemory, long maxMemory);
 	}
 
+	/**
+	 * Constructs a new {@code MemoryWarningSystem} and registers a
+	 * JMX notification listener on the memory MXBean.
+	 */
 	public MemoryWarningSystem() {
 		MemoryMXBean mbean = ManagementFactory.getMemoryMXBean();
 		NotificationEmitter emitter = (NotificationEmitter) mbean;
@@ -49,16 +69,35 @@ public class MemoryWarningSystem {
 		}, null, null);
 	}
 
+	/**
+	 * Registers a listener to be notified when memory usage is low.
+	 *
+	 * @param listener the listener to add; must not be {@code null}
+	 * @return {@code true} if the listener was added
+	 */
 	public boolean addListener(Listener listener) {
 		return listeners.add(listener);
 	}
 
+	/**
+	 * Removes a previously registered listener.
+	 *
+	 * @param listener the listener to remove
+	 * @return {@code true} if the listener was removed
+	 */
 	public boolean removeListener(Listener listener) {
 		return listeners.remove(listener);
 	}
 
+	/** The tenured generation memory pool bean. */
 	private static final MemoryPoolMXBean tenuredGenPool = findTenuredGenPool();
 
+	/**
+	 * Sets the usage threshold as a percentage of maximum memory.
+	 *
+	 * @param percentage the threshold in the range (0.0, 1.0]
+	 * @throws IllegalArgumentException if the percentage is out of range
+	 */
 	public static void setPercentageUsageThreshold(double percentage) {
 		if (percentage <= 0.0 || percentage > 1.0) {
 			throw new IllegalArgumentException("Percentage not in range");
@@ -69,18 +108,19 @@ public class MemoryWarningSystem {
 	}
 
 	/**
-	 * Tenured Space Pool can be determined by it being of type HEAP and by it
-	 * being possible to set the usage threshold.
+	 * Finds the tenured generation memory pool -- the first HEAP pool
+	 * that supports usage thresholds.
+	 *
+	 * @return the tenured generation pool bean
+	 * @throws AssertionError if no suitable pool is found
 	 */
 	private static MemoryPoolMXBean findTenuredGenPool() {
 		for (MemoryPoolMXBean pool : ManagementFactory.getMemoryPoolMXBeans()) {
-			// I don't know whether this approach is better, or whether
-			// we should rather check for the pool name "Tenured Gen"?
 			if (pool.getType() == MemoryType.HEAP && pool.isUsageThresholdSupported()) {
 				return pool;
 			}
 		}
 		throw new AssertionError("Could not find tenured space");
 	}
-	
+
 }
