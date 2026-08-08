@@ -11,41 +11,74 @@ import org.hyperic.sigar.SigarException;
 
 import kamon.sigar.SigarProvisioner;
 
+/**
+ * Utility class that provisions the Sigar native library and exposes
+ * convenience methods for querying memory, CPU, filesystem, and
+ * network statistics.
+ *
+ * <p>Each instance lazily provisions the native Sigar libraries on
+ * construction. Call {@link #update()} to re-initialize the underlying
+ * {@link Sigar} instance.</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see Sigar
+ * @see SigarProvisioner
+ */
 public class SystemRuntime {
-	
+
 	private Sigar sigar = null;
 
+	/**
+	 * Re-provisions the Sigar native library and re-creates the
+	 * internal {@link Sigar} instance.
+	 *
+	 * @throws Exception if provisioning or Sigar initialization fails
+	 */
 	public void update() throws Exception {
 		SigarProvisioner.provision();
 		sigar = new Sigar();
 	}
 
+	/**
+	 * Constructs a new {@code SystemRuntime}, provisioning the Sigar
+	 * native library if necessary.
+	 *
+	 * @throws Exception if provisioning or Sigar initialization fails
+	 */
 	public SystemRuntime() throws Exception {
 		SigarProvisioner.provision();
 		sigar = new Sigar();
 	}
 
+	/**
+	 * Returns a snapshot of physical memory usage.
+	 *
+	 * @return a Sigar {@link Mem} bean
+	 * @throws SigarException if the memory information cannot be retrieved
+	 */
 	public Mem memory() throws SigarException {
 		Mem mem = sigar.getMem();
-		// // 内存总量
-		// System.out.println("内存总量: " + mem.getTotal() / 1024L + "K av");
-		// // 当前内存使用量
-		// System.out.println("当前内存使用量: " + mem.getUsed() / 1024L + "K used");
-		// // 当前内存剩余量
-		// System.out.println("当前内存剩余量: " + mem.getFree() / 1024L + "K free");
 		return mem;
 	}
 
+	/**
+	 * Returns a snapshot of overall CPU usage percentages.
+	 *
+	 * @return a Sigar {@link CpuPerc} bean
+	 * @throws SigarException if the CPU information cannot be retrieved
+	 */
 	public CpuPerc cpu() throws SigarException {
 		CpuPerc perc = sigar.getCpuPerc();
-		// System.out.println("整体cpu的占用情况:");
-		// System.out.println("空闲率: " +
-		// CpuPerc.format(perc.getIdle()));//获取当前cpu的空闲率
-		// System.out.println("占用率: "+
-		// CpuPerc.format(perc.getCombined()));//获取当前cpu的占用率
 		return perc;
 	}
 
+	/**
+	 * Prints filesystem information for all mounted file systems to
+	 * standard output. Intended for diagnostic / debugging use.
+	 *
+	 * @throws Exception if filesystem information cannot be retrieved
+	 */
 	public void file() throws Exception {
 		FileSystem fslist[] = sigar.getFileSystemList();
 		for (int i = 0; i < fslist.length; i++) {
@@ -70,6 +103,18 @@ public class SystemRuntime {
 		return;
 	}
 
+	/**
+	 * Measures the network receive and transmit throughput for the
+	 * interface bound to the given IP address over a 500 ms sampling
+	 * window.
+	 *
+	 * @param ip the IP address of the network interface to measure
+	 * @return a two-element float array where {@code [0]} is the
+	 *         receive speed in KB/ms and {@code [1]} is the transmit
+	 *         speed in KB/ms; returns {@code {0f, 0f}} if the
+	 *         interface is not found
+	 * @throws Exception if network statistics cannot be retrieved
+	 */
 	public float[] net(String ip) throws Exception {
 		float[] result = { 0f, 0f };
 		if (netBytes(ip) == null){
@@ -89,6 +134,15 @@ public class SystemRuntime {
 		return result;
 	}
 
+	/**
+	 * Returns the network interface statistics for the interface bound
+	 * to the given IP address.
+	 *
+	 * @param ip the IP address to look up
+	 * @return a Sigar {@link NetInterfaceStat} for the matching interface,
+	 *         or {@code null} if no interface matches the given IP
+	 * @throws Exception if network interface information cannot be retrieved
+	 */
 	public NetInterfaceStat netBytes(String ip) throws Exception {
 		String ifNames[] = sigar.getNetInterfaceList();
 		NetInterfaceStat result = null;
@@ -99,31 +153,6 @@ public class SystemRuntime {
 				result = sigar.getNetInterfaceStat(name);
 				break;
 			}
-			// System.out.println("网络设备名: " + name);// 网络设备名
-			// System.out.println("IP地址: " + ifconfig.getAddress());// IP地址
-			// System.out.println("子网掩码: " + ifconfig.getNetmask());// 子网掩码
-			// if ((ifconfig.getFlags() & 1L) <= 0L) {
-			// System.out.println("!IFF_UP...skipping getNetInterfaceStat");
-			// continue;
-			// }
-			// NetInterfaceStat ifstat = sigar.getNetInterfaceStat(name);
-			//
-			// System.out.println(name + "接收的总包裹数:" + ifstat.getRxPackets());//
-			// 接收的总包裹数
-			// System.out.println(name + "发送的总包裹数:" + ifstat.getTxPackets());//
-			// 发送的总包裹数
-			// System.out.println(name + "接收到的总字节数:" + ifstat.getRxBytes());//
-			// 接收到的总字节数
-			// System.out.println(name + "发送的总字节数:" + ifstat.getTxBytes());//
-			// 发送的总字节数
-			// System.out.println(name + "接收到的错误包数:" + ifstat.getRxErrors());//
-			// 接收到的错误包数
-			// System.out.println(name + "发送数据包时的错误数:" +
-			// ifstat.getTxErrors());// 发送数据包时的错误数
-			// System.out.println(name + "接收时丢弃的包数:" + ifstat.getRxDropped());//
-			// 接收时丢弃的包数
-			// System.out.println(name + "发送时丢弃的包数:" + ifstat.getTxDropped());//
-			// 发送时丢弃的包数
 		}
 		return result;
 	}

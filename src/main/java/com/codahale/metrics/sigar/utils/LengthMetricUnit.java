@@ -15,128 +15,118 @@
  */
 package com.codahale.metrics.sigar.utils;
 
+/**
+ * Metric length unit constants and conversion stubs.
+ *
+ * <p>Defines constants from attometers (am) through gigameters (Gm),
+ * light-years (ly), and astronomical units (au).</p>
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 3.0.0
+ * @see LengthBritishUnit
+ */
 public enum LengthMetricUnit {
 
+	/** Attometer constant (10^-18 m). */
 	Attometer{
-		
-		
-		
+
+
+
 	};
-	
+
 	// Handy constants for conversion methods
-	
-	/*
-	 	
-	 	1微米（um）=1000纳米（nm）；
-		1纳米（nm) =1000 皮米(pm)
-		1皮米(pm)=1000飞米(fm)
-		
-	 	京米/吉米(Gm)、兆米(Mm)、千米(km)、分米(dm)、厘米(cm)、毫米(mm)、丝米(dmm)、忽米(cmm)、微米(μm)、纳米(nm)、皮米(pm)、飞米(fm)、阿米(am)
-	 	1Gm=1×10^9m
-		1Mm=1×10^6m
-		1km=1×10^3m
-		1dm=1×10^(-1)m
-		1cm=1×10^(-2)m
-		1mm=1×10^(-3)m
-		1dmm=1×10^(-4)m
-		1cmm=1×10^(-5)m
-		1μm=1×10^(-6)m
-		1nm=1×10^(-9)m
-		1pm=1×10^(-12)m
-		1fm=1×10^(-15)m
-		1am=1×10^(-18)m
-	 */
-	
-	/**
-	 * am(Attometer:阿米)
-	 */
+
+	/** 1 Attometer (10^-18 m). */
     static final long AM = 1L;
-	/**
-	 * 1fm(Femtometer：飞米) = 1000am（阿米）
-	 */
+	/** 1 Femtometer = 1000 am. */
     static final long FM = AM * 1000L;
-	/**
-	 * 1pm(Picometer：皮米) =1000fm（飞米）
-	 */
+	/** 1 Picometer = 1000 fm. */
     static final long PM = FM * 1000L;
-    /**
-	 * 1nm（Nanometrer ，纳米、毫微米） = 1000pm（皮米）
-	 */
+    /** 1 Nanometer = 1000 pm. */
     static final long NM = PM * 1000L;
-    /**
-	 * 1μm（Micrometrer ：微米 ） = 1000nm（纳米）
-	 */
+    /** 1 Micrometer = 1000 nm. */
     static final long UM = NM * 1000L;
-    /**
-	 * 1cmm（Centimillimeter：忽米 ） = 10μm（微米）
-	 */
+    /** 1 Centimillimeter = 10 um. */
     static final long CMM = UM * 10L;
-    /**
-	 * 1dmm（Decimillimetrer：丝米 ） = 10cmm（忽米）
-	 */
+    /** 1 Decimillimeter = 10 cmm. */
     static final long DMM = CMM * 10L;
-	/**
-	 * 1mm（Millimeter：毫米 ） = 10dmm（丝米）
-	 */
+	/** 1 Millimeter = 10 dmm. */
     static final long MM = DMM * 10L;
-    /**
-	 * 1cm(Centimeter，厘米)=10mm（毫米）
-	 */
+    /** 1 Centimeter = 10 mm. */
     static final long CM = MM * 10L;
-    /**
-   	 * 1dm（Decimeter，分米）=10cm（厘米）
-   	 */
+    /** 1 Decimeter = 10 cm. */
     static final long DM = CM * 10L;
-    /**
-	 * 1m（Meter ：米 ）= 10dm（分米） = 100cm（厘米）
-	 */
+    /** 1 Meter = 10 dm. */
     static final long M = DM * 10L;
-    /**
-	 * 1km（Kilometer，千米，又称“公里”）= 1000m（米）
-	 */
+    /** 1 Kilometer = 1000 m. */
     static final long KM = M * 1000L;
-    /**
-   	 * 1Mm（Megameter，兆米）= 1000km（千米）
-   	 */
+    /** 1 Megameter = 1000 km. */
     static final long Mm = KM * 1000L;
-    /**
-   	 * 1Gm（Gigametrer， 京米/吉米）= 1000Mm(兆米) 
-   	 */
+    /** 1 Gigameter = 1000 Mm. */
     static final long Gm = Mm * 1000L;
-    /**
-	 * 1ly（Light-Year， 光年）= 9460730472581km（千米）
-	 */
+    /** 1 Light-year = 9,460,730,472,581 km. */
     static final long LY = KM * 9460730472581L;
-    /**
-	 * 1au（Astronomical Unit，天文单位）= 0.0000158ly（光年）
-	 */
+    /** 1 Astronomical Unit = 0.0000158 light-years. */
     static final float AU = LY * 0.0000158F;
-    
+
     /**
-     * Scale d by m, checking for overflow.
-     * This has a short name to make above code more readable.
+     * Scales {@code d} by {@code m}, checking for overflow.
+     *
+     * @param d    the value to scale
+     * @param m    the multiplier
+     * @param over the overflow threshold
+     * @return the scaled value, clamped to safe bounds
      */
     static long x(long d, long m, long over) {
         if (d >  over) return Long.MAX_VALUE;
         if (d < -over) return Long.MIN_VALUE;
         return d * m;
     }
-    
+
+    /**
+     * Converts a value from the given source unit to this unit.
+     *
+     * @param sourceDuration the value to convert
+     * @param sourceUnit     the source unit
+     * @return the converted value
+     * @throws AbstractMethodError always (not yet implemented)
+     */
     public long convert(long sourceDuration, LengthMetricUnit sourceUnit) {
         throw new AbstractMethodError();
     }
 
+    /**
+     * Converts a value from this unit to bits.
+     *
+     * @param duration the value in this unit
+     * @return the equivalent in bits
+     * @throws AbstractMethodError always (not yet implemented)
+     */
     public long toBits(long duration) {
         throw new AbstractMethodError();
     }
-    
+
+    /**
+     * Converts a value from this unit to bytes.
+     *
+     * @param duration the value in this unit
+     * @return the equivalent in bytes
+     * @throws AbstractMethodError always (not yet implemented)
+     */
     public long toBytes(long duration) {
         throw new AbstractMethodError();
     }
 
+    /**
+     * Converts a value from this unit to kilobytes.
+     *
+     * @param duration the value in this unit
+     * @return the equivalent in kilobytes
+     * @throws AbstractMethodError always (not yet implemented)
+     */
     public long toKilobytes(long duration) {
         throw new AbstractMethodError();
     }
-	
-	
+
+
 }
