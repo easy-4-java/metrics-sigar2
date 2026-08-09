@@ -42,7 +42,19 @@ public class JVMPID
     
     public static int pid() {
         try {
-            return (int) ProcessHandle.current().pid();
+            try {
+                Class<?> phClass = Class.forName("java.lang.ProcessHandle");
+                Object handle = phClass.getMethod("current").invoke(null);
+                Object pid = phClass.getMethod("pid").invoke(handle);
+                return (int) (long) pid;
+            } catch (Throwable ignore) {
+                String name = ManagementFactory.getRuntimeMXBean().getName();
+                int at = name.indexOf('@');
+                if (at > 0) {
+                    return Integer.parseInt(name.substring(0, at));
+                }
+                return -1;
+            }
         } catch (Exception e) {
             return -1;
         }
