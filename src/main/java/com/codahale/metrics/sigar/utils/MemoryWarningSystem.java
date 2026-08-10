@@ -28,7 +28,7 @@ import java.util.*;
  * JMX memory pool API), so only one {@code MemoryWarningSystem}
  * instance should be created per JVM.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Listener
  */

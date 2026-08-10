@@ -40,7 +40,7 @@ import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
  * usage (heap and non-heap), memory pool details, OS info, thread
  * stats, JIT compilation stats, and garbage collector stats.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see JVMInfo
  * @see MemoryInfo

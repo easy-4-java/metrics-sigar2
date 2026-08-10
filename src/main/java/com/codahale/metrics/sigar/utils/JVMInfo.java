@@ -31,7 +31,7 @@ import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
  * memory usage (heap/non-heap), memory pool details, GC stats, and
  * runtime memory with unit conversion.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see JMXInfo
  * @see JVMProperty

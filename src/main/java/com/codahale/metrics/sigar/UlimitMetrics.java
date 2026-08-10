@@ -14,7 +14,7 @@ import com.codahale.metrics.MetricRegistry;
  * such as open file descriptors, stack size, core file size, etc.
  * Infinite limits reported by the OS are replaced with {@code -1}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see AbstractSigarMetric
  * @see Ulimit

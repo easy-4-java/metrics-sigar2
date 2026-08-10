@@ -21,7 +21,7 @@ package com.codahale.metrics.sigar.utils;
  * <p>Defines constants from attometers (am) through gigameters (Gm),
  * light-years (ly), and astronomical units (au).</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see LengthBritishUnit
  */

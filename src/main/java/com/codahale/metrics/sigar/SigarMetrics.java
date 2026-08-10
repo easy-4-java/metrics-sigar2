@@ -12,7 +12,7 @@ import com.codahale.metrics.MetricRegistry;
  * {@link FilesystemMetrics}, and {@link UlimitMetrics} into a single
  * facade. Use {@link #getInstance()} to obtain the shared instance.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see CpuMetrics
  * @see MemoryMetrics

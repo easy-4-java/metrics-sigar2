@@ -16,7 +16,7 @@ import com.codahale.metrics.sigar.rmi.SystemRuntime;
  * and packages them into a {@link SigarRMIInfo} data transfer object.
  * Memory values are reported in megabytes; network speeds in KB/s.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see SigarRemoteService
  * @see SystemRuntime

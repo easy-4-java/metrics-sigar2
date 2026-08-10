@@ -27,7 +27,7 @@ import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
  * memory pool) with its init/used/committed/max values and a
  * capacity unit for formatting.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see JMXInfo
  * @see JVMInfo

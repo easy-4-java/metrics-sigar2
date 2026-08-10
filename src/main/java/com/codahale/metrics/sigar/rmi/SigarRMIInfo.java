@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Serializable data transfer object carrying a snapshot of system
  * metrics (memory, CPU, and network speeds) for RMI transport.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see SigarRemoteService
  */

@@ -20,7 +20,7 @@ package com.codahale.metrics.sigar.utils;
  * Java installation path, VM specification, runtime paths, class
  * version, and library paths.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see JVMOSProperty
  */

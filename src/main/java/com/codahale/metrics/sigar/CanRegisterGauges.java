@@ -7,7 +7,7 @@ import com.codahale.metrics.MetricRegistry;
  * {@link com.codahale.metrics.Gauge Gauge} instances with a
  * {@link MetricRegistry}.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see com.codahale.metrics.Gauge
  * @see MetricRegistry

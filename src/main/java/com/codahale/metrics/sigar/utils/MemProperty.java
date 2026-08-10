@@ -19,7 +19,7 @@ package com.codahale.metrics.sigar.utils;
  * Enumeration of JVM memory property keys corresponding to the fields
  * of a {@link java.lang.management.MemoryUsage MemoryUsage} object.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see java.lang.management.MemoryUsage
  * @see MemoryInfo

@@ -24,7 +24,7 @@ import com.codahale.metrics.sigar.utils.CapacityUtils.Unit;
  * <p>Provides static methods for host info, OS properties, memory
  * usage (RAM + swap + JVM), CPU usage, and disk usage.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Sigar
  * @see JVMInfo

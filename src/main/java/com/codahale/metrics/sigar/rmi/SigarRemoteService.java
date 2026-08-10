@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
  * RMI remote interface for retrieving a snapshot of system metrics
  * (memory in MB, CPU combined usage, and network speed in KB/s).
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see SigarRMIInfo
  * @see com.codahale.metrics.sigar.rmi.impl.DefaultSigarRemoteServiceImpl

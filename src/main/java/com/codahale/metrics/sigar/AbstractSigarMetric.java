@@ -9,7 +9,7 @@ import org.hyperic.sigar.Sigar;
  * to gather native operating-system metrics such as CPU, memory,
  * filesystem, and ulimit information.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see CanRegisterGauges
  * @see Sigar

@@ -24,7 +24,7 @@ package com.codahale.metrics.sigar.utils;
  * for all other units. Includes overflow protection via
  * {@link #x(double, double, double)}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see CapacityUtils
  */
