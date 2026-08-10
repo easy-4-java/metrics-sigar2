@@ -341,10 +341,13 @@
             <activation>
                 <jdk>[1.7,)</jdk>
             </activation>
-            <properties>
-                <lombok.version>1.18.46</lombok.version>
-                <additionalparam>-Xdoclint:none</additionalparam>
-                <sigar-loader.version>1.6.6</sigar-loader.version></properties>
+    <properties>
+        <!-- Dependency versions -->
+        <additionalparam>-Xdoclint:none</additionalparam>
+        <lombok.version>1.18.46</lombok.version>
+        <sigar-loader.version>1.6.6</sigar-loader.version>
+    </properties>
+
         </profile>
         
 
@@ -482,19 +485,26 @@
 
     
     <properties>
+        <java.version>21</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.version>3.0</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.sigar-dist-dir>hyperic-sigar-1.6.5</project.sigar-dist-dir>
+        <!-- Dependency versions -->
         <commons-codec.version>1.22.0</commons-codec.version>
+        <commons-io.version>2.22.0</commons-io.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <commons-text.version>1.15.0</commons-text.version>
-        <commons-io.version>2.22.0</commons-io.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <junit.version>4.13.2</junit.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
-        <java.version>21</java.version>
-        <maven.version>3.0</maven.version>
-        
+        <junit.version>4.13.2</junit.version>
+        <metrics.version>4.2.20</metrics.version>
+        <mockito.version>4.11.0</mockito.version>
+        <project.sigar-dist-dir>hyperic-sigar-1.6.5</project.sigar-dist-dir>
+        <sigar.version>1.7.0.0</sigar.version>
+        <slf4j.version>2.0.18</slf4j.version>
+        <!-- Maven Plugin versions -->
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
+        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
@@ -502,19 +512,16 @@
         <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
         <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
         <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-        <maven-nexus-staging-plugin.version>1.7.0</maven-nexus-staging-plugin.version>
-        <metrics.version>4.2.20</metrics.version>
-        <mockito.version>4.11.0</mockito.version>
-        
-        <slf4j.version>2.0.18</slf4j.version>
-        <sigar.version>1.7.0.0</sigar.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release><maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version><maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version></properties>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+    </properties>
+
 
     
     <dependencyManagement>
