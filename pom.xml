@@ -74,6 +74,7 @@
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+    
     </properties>
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
@@ -503,7 +504,8 @@
                 <!-- Maven Plugin versions -->
                 <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
                 <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
-            </properties>
+            
+    </properties>
         </profile>
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy（GPG 签名 + 源码 + Javadoc + Central 发布插件） -->
         <profile>
