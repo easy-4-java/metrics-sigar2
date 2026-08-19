@@ -9,16 +9,14 @@
     <description>Metrics + Hyperic Sigar for OS-level monitoring</description>
     <packaging>jar</packaging>
 
-    
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
-    
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
@@ -26,7 +24,6 @@
         <tag>${project.artifactId}</tag>
     </scm>
 
-    
     <developers>
         <developer>
             <name>Loong Wan</name>
@@ -39,7 +36,6 @@
         </developer>
     </developers>
 
-    
     <distributionManagement>
         <repository>
             <id>2624322-release-6F6h6R</id>
@@ -51,39 +47,33 @@
         </snapshotRepository>
     </distributionManagement>
 
-    
     <build>
         <pluginManagement>
             <plugins>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
-                        
-                        
-                        
+
                         <encoding>${project.build.sourceEncoding}</encoding>
-                        
+
                         <maxmem>512M</maxmem>
                     </configuration>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${maven-enforcer-plugin.version}</version>
@@ -98,14 +88,14 @@
                                 <rules>
                                     <requireMavenVersion>
                                         <message>
-	                                        You are running an older version of Maven. This application requires at least Maven ${maven.version}.
-										</message>
+                                            You are running an older version of Maven. This application requires at least Maven ${maven.version}.
+                                        </message>
                                         <version>[${maven.version}.0,)</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
                                         <message>
-	                                        You are running an older version of Java. This application requires at least JDK ${java.version}.
-										</message>
+                                            You are running an older version of Java. This application requires at least JDK ${java.version}.
+                                        </message>
                                         <version>[${java.version}.0,)</version>
                                     </requireJavaVersion>
                                 </rules>
@@ -114,9 +104,8 @@
                     </executions>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>${maven-gpg-plugin.version}</version>
@@ -131,17 +120,15 @@
                     </executions>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${maven-install-plugin.version}</version>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
@@ -150,9 +137,8 @@
                     </configuration>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven-release-plugin.version}</version>
@@ -165,9 +151,8 @@
                     </configuration>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>${maven-source-plugin.version}</version>
@@ -184,9 +169,8 @@
                     </executions>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
@@ -207,9 +191,8 @@
                     </configuration>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${maven-jar-plugin.version}</version>
@@ -224,9 +207,8 @@
                     </configuration>
                 </plugin>
 
-                
                 <plugin>
-                    
+
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>${maven-javadoc-plugin.version}</version>
@@ -246,7 +228,6 @@
                     </executions>
                 </plugin>
 
-                
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -265,9 +246,8 @@
         </pluginManagement>
         <plugins>
 
-            
             <plugin>
-                
+
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${maven-jacoco-plugin.version}</version>
@@ -310,15 +290,14 @@
                 </executions>
             </plugin>
 
-            
             <plugin>
-                
+
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>${java.version}</release>
-                        
+
                     <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <maxmem>512M</maxmem>
@@ -334,106 +313,92 @@
         </plugins>
     </build>
 
-    
     <profiles>
         <profile>
             <id>disable-javadoc-doclint</id>
             <activation>
                 <jdk>[1.7,)</jdk>
             </activation>
-    <properties>
-        <!-- Dependency versions -->
-        <additionalparam>-Xdoclint:none</additionalparam>
-        <lombok.version>1.18.46</lombok.version>
-        <sigar-loader.version>1.6.6</sigar-loader.version>
-    </properties>
+            <properties>
+                <!-- Dependency versions -->
+                <additionalparam>-Xdoclint:none</additionalparam>
+                <lombok.version>1.18.46</lombok.version>
+                <sigar-loader.version>1.6.6</sigar-loader.version>
+            </properties>
 
         </profile>
-        
 
         <profile>
             <id>release</id>
             <build>
                 <plugins>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-compiler-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-install-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>
                     </plugin>
 
-                    
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -441,16 +406,14 @@
                 </plugins>
             </build>
         </profile>
-        
 
         <profile>
             <id>central</id>
             <build>
                 <plugins>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>${maven-gpg-plugin.version}</version>
@@ -465,9 +428,8 @@
                         </executions>
                     </plugin>
 
-                    
                     <plugin>
-                        
+
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
                         <version>${maven-central-publishing-plugin.version}</version>
@@ -483,7 +445,6 @@
         </profile>
     </profiles>
 
-    
     <properties>
         <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -524,78 +485,76 @@
         <sigar-loader.version>1.6.6</sigar-loader.version>
     </properties>
 
-
-    
     <dependencyManagement>
         <dependencies>
-            
+
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-core</artifactId>
                 <version>${hamcrest.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
                 <version>${hamcrest.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>${commons-text.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>io.dropwizard.metrics</groupId>
                 <artifactId>metrics-core</artifactId>
                 <version>${metrics.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.tencent.devops.ci-plugins</groupId>
                 <artifactId>sigar</artifactId>
                 <version>${sigar.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>io.kamon</groupId>
                 <artifactId>sigar-loader</artifactId>
                 <version>${sigar-loader.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -605,58 +564,57 @@
         </dependencies>
     </dependencyManagement>
 
-    
     <dependencies>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-library</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>com.tencent.devops.ci-plugins</groupId>
             <artifactId>sigar</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>io.kamon</groupId>
             <artifactId>sigar-loader</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
